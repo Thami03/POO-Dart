@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -124,20 +125,22 @@ class DataService {
 final dataService = DataService();
 
 void main() {
-  MyApp app = MyApp();
+  MyApp app = const MyApp();
 
   runApp(app);
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Dicas"),
+            title: const Text("Bem-vind@s"),
           ),
           body: ValueListenableBuilder(
               valueListenable: dataService.tableStateNotifier,
@@ -145,11 +148,27 @@ class MyApp extends StatelessWidget {
                 switch (value['status']) {
                   case TableStatus.idle:
                     return Center(
-                      child: Column(children: [Text("Toque algum botão")]),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image:
+                                  'https://www.wallpaperflare.com/static/855/449/67/star-trek-movies-star-trek-wallpaper.jpg',
+                              width: 500,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              "Aperte algum botão",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic),
+                            )
+                          ]),
                     );
-
                   case TableStatus.loading:
-                    return CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
 
                   case TableStatus.ready:
                     return DataTableWidget(
@@ -158,10 +177,10 @@ class MyApp extends StatelessWidget {
                         propertyNames: value['propertyNames']);
 
                   case TableStatus.error:
-                    return Text("Sem conexão com internet");
+                    return const Text("Sem conexão com internet");
                 }
 
-                return Text("...");
+                return const Text("...");
               }),
           bottomNavigationBar:
               NewNavBar(itemSelectedCallback: dataService.carregar),
@@ -170,9 +189,10 @@ class MyApp extends StatelessWidget {
 }
 
 class NewNavBar extends HookWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final _itemSelectedCallback;
 
-  NewNavBar({itemSelectedCallback})
+  NewNavBar({super.key, itemSelectedCallback})
       : _itemSelectedCallback = itemSelectedCallback ?? (int) {}
 
   @override
@@ -204,7 +224,8 @@ class DataTableWidget extends StatelessWidget {
   final List<String> columnNames;
   final List<String> propertyNames;
 
-  DataTableWidget({
+  const DataTableWidget({
+    super.key,
     this.jsonObjects = const [],
     this.columnNames = const [],
     this.propertyNames = const [],
@@ -216,9 +237,10 @@ class DataTableWidget extends StatelessWidget {
       DataTable(
           columns: columnNames
               .map((name) => DataColumn(
-                  label: Expanded(
-                      child: Text(name,
-                          style: TextStyle(fontStyle: FontStyle.italic)))))
+                      label: Expanded(
+                          child: Text(
+                    name,
+                  ))))
               .toList(),
           rows: jsonObjects
               .map((obj) => DataRow(
