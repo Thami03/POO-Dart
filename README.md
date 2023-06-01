@@ -1,9 +1,6 @@
 # Tarefas - POO
- Tarefas para a disciplina de POO
- links:</br>
- Receita 1:https://zc206w0c306.zapp.page/#</br>
- Receita 4:https://zu2u06stu2v0.zapp.page/#/</br>
- Formulário: https://zv2q067mv2r0.zapp.page/#/</br>
- tarefa 1 gerência de estados: https://z27m06h227n0.zapp.page/#/</br>
-
-
+ Repositório voltado para a disciplina de POO I.
+ </br>
+ Todas as receitas estão dentro da pasta'lib', para rodar cada receita é necessário escrever no terminal: 'flutter run lib/nome_da_receita.dart'. </br>
+ Exemplo:</br>
+  thami@home:~/Documentos/Poo/receitas$ flutter run lib/receita1.dart
