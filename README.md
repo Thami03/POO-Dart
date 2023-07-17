@@ -1,7 +1,7 @@
 <h1 align="center"> Tarefas - POO I </h1>
 
 
-## Repositório voltado para a disciplina de POO I. Todas as receitas estão dentro da pasta 'lib'.
+## Repositório voltado para a disciplina de POO I. As receitas estão dentro da pasta 'lib', menos a receita 10c (ela tem uma pasta).
 
 
 #  🛠️ Para rodar o projeto, basta seguir os passos abaixo:
