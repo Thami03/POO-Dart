@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../util/filtrar.dart';
-import '../util/ordenar.dart';
+import '../util/filtro.dart';
+import '../util/ordenador.dart';
 
 enum TableStatus { idle, loading, ready, error }
 
